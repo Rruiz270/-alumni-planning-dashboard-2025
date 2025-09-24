@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Pessoa, NecessidadePessoa, VerticalType } from '../types';
-import { User, DollarSign, Calendar, Plus, Edit2, AlertCircle, Trash2 } from 'lucide-react';
+import type { Pessoa, NecessidadePessoa } from '../types';
+import { User, DollarSign, Plus, Edit2, AlertCircle, Trash2 } from 'lucide-react';
 
 interface Props {
   equipeAtual: Pessoa[];

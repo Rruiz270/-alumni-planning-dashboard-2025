@@ -1,10 +1,10 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import { ContratosAtuais } from './components/ContratosAtuais';
 import { NegociacoesAndamento } from './components/NegociacoesAndamento';
 import { Dashboard } from './components/Dashboard';
 import { EstrategiaMarketingComponent } from './components/EstrategiaMarketing';
 import { GestaoEquipe } from './components/GestaoEquipe';
-import { DadosFinanceiros, Contrato, NegociacaoEmAndamento, EstrategiaMarketing, Pessoa, NecessidadePessoa } from './types';
+import type { DadosFinanceiros, Contrato, NegociacaoEmAndamento, EstrategiaMarketing, Pessoa, NecessidadePessoa } from './types';
 import { dadosIniciais } from './data/mockData';
 import { BarChart3, FileText, TrendingUp, Megaphone, Users, GraduationCap } from 'lucide-react';
 

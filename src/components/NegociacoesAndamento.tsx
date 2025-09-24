@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { NegociacaoEmAndamento, VerticalType } from '../types';
+import type { NegociacaoEmAndamento, VerticalType } from '../types';
 import { Building, Users, DollarSign, Calendar, TrendingUp, Edit2, Plus } from 'lucide-react';
 
 interface Props {

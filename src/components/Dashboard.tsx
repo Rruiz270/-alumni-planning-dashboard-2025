@@ -104,7 +104,7 @@ export const Dashboard: React.FC<Props> = ({ dados }) => {
               <XAxis dataKey="name" />
               <YAxis tickFormatter={(value) => `R$ ${(value / 1000).toFixed(0)}k`} />
               <Tooltip 
-                formatter={(value: number) => `R$ ${value.toLocaleString('pt-BR')}`}
+                formatter={(value: unknown) => `R$ ${Number(value).toLocaleString('pt-BR')}`}
               />
               <Bar dataKey="valor" fill="#3B82F6">
                 {dadosVertical.map((entry, index) => (
@@ -134,7 +134,7 @@ export const Dashboard: React.FC<Props> = ({ dados }) => {
                   <Cell key={`cell-${index}`} fill={verticalColors[entry.name as VerticalType]} />
                 ))}
               </Pie>
-              <Tooltip formatter={(value: number) => `R$ ${value.toLocaleString('pt-BR')}`} />
+              <Tooltip formatter={(value: unknown) => `R$ ${Number(value).toLocaleString('pt-BR')}`} />
             </PieChart>
           </ResponsiveContainer>
         </div>
@@ -149,7 +149,7 @@ export const Dashboard: React.FC<Props> = ({ dados }) => {
             <XAxis dataKey="mes" />
             <YAxis tickFormatter={(value) => `R$ ${(value / 1000).toFixed(0)}k`} />
             <Tooltip 
-              formatter={(value: number) => `R$ ${value.toLocaleString('pt-BR')}`}
+              formatter={(value: unknown) => `R$ ${Number(value).toLocaleString('pt-BR')}`}
             />
             <Legend />
             <Line 

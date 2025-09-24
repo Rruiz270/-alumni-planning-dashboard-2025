@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { EstrategiaMarketing, VerticalType, Automacao } from '../types';
-import { Target, DollarSign, Bot, Plus, Edit2, Trash2 } from 'lucide-react';
+import type { EstrategiaMarketing, VerticalType, Automacao } from '../types';
+import { Target, DollarSign, Bot, Plus, Edit2, Trash2, TrendingUp } from 'lucide-react';
 
 interface Props {
   estrategias: EstrategiaMarketing[];

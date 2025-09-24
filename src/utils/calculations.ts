@@ -1,4 +1,4 @@
-import { Contrato, NegociacaoEmAndamento, EstrategiaMarketing, Pessoa, NecessidadePessoa, VerticalType } from '../types';
+import type { Contrato, NegociacaoEmAndamento, EstrategiaMarketing, Pessoa, NecessidadePessoa, VerticalType } from '../types';
 
 export const calcularReceitaAtual = (contratos: Contrato[]): number => {
   return contratos

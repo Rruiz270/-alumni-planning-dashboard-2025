@@ -1,4 +1,4 @@
-import { DadosFinanceiros } from '../types';
+import type { DadosFinanceiros } from '../types';
 
 export const dadosIniciais: DadosFinanceiros = {
   contratos: [
