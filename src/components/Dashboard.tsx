@@ -1,7 +1,7 @@
 import React from 'react';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 import { TrendingUp, Users, DollarSign, Calendar } from 'lucide-react';
-import { DadosFinanceiros, VerticalType } from '../types';
+import type { DadosFinanceiros, VerticalType } from '../types';
 import { 
   calcularReceitaAtual, 
   calcularReceitaPorVertical, 
