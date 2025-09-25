@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import type { NegociacaoEmAndamento, VerticalType } from '../types';
-import { Building, Users, DollarSign, Calendar, TrendingUp, Edit2, Plus } from 'lucide-react';
+import { Building, Users, DollarSign, Calendar, TrendingUp, Edit2, Plus, Upload, Link } from 'lucide-react';
 import { formatDateForInput, parseInputDate } from '../utils/dateHelpers';
 
 interface Props {
@@ -264,6 +264,17 @@ export const NegociacoesAndamento: React.FC<Props> = ({ negociacoes, onUpdateNeg
                         {neg.observacoes && (
                           <p className="text-sm text-gray-600 mt-2 italic">{neg.observacoes}</p>
                         )}
+                        
+                        <div className="mt-3 flex gap-3">
+                          <button className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800">
+                            <Upload size={14} />
+                            Documentos
+                          </button>
+                          <button className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800">
+                            <Link size={14} />
+                            Links
+                          </button>
+                        </div>
                       </div>
                       
                       <button

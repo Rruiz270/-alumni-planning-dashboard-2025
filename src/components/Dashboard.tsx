@@ -1,6 +1,6 @@
 import React from 'react';
 import { BarChart, Bar, LineChart, Line, PieChart, Pie, Cell, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
-import { TrendingUp, Users, DollarSign, Calendar } from 'lucide-react';
+import { TrendingUp, Users, DollarSign, Calendar, Building, Target } from 'lucide-react';
 import type { DadosFinanceiros, VerticalType } from '../types';
 import { 
   calcularReceitaAtual, 
@@ -24,6 +24,9 @@ export const Dashboard: React.FC<Props> = ({ dados }) => {
   const totalAlunos = dados.contratos
     .filter(c => c.status === 'ativo')
     .reduce((acc, c) => acc + c.numeroAlunos, 0);
+    
+  const totalEmpresasNegociacao = dados.negociacoes.length;
+  const totalAlunosEstimado = dados.negociacoes.reduce((acc, n) => acc + n.numeroAlunosEstimado, 0);
 
   const verticalColors: Record<VerticalType, string> = {
     'B2B': '#3B82F6',
@@ -46,7 +49,7 @@ export const Dashboard: React.FC<Props> = ({ dados }) => {
   return (
     <div className="space-y-6">
       {/* Cards de Métricas */}
-      <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-6 gap-4">
         <div className="bg-white p-6 rounded-lg shadow-md">
           <div className="flex items-center justify-between">
             <div>
@@ -90,6 +93,26 @@ export const Dashboard: React.FC<Props> = ({ dados }) => {
               </p>
             </div>
             <Calendar className="text-orange-500" size={32} />
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600">Empresas em Negociação</p>
+              <p className="text-2xl font-bold text-gray-800">{totalEmpresasNegociacao}</p>
+            </div>
+            <Building className="text-indigo-500" size={32} />
+          </div>
+        </div>
+
+        <div className="bg-white p-6 rounded-lg shadow-md">
+          <div className="flex items-center justify-between">
+            <div>
+              <p className="text-sm text-gray-600">Alunos Potenciais</p>
+              <p className="text-2xl font-bold text-gray-800">{totalAlunosEstimado}</p>
+            </div>
+            <Target className="text-red-500" size={32} />
           </div>
         </div>
       </div>
@@ -142,7 +165,7 @@ export const Dashboard: React.FC<Props> = ({ dados }) => {
 
       {/* Gráfico de Forecast Anual */}
       <div className="bg-white p-6 rounded-lg shadow-md">
-        <h3 className="text-lg font-semibold mb-4">Previsão de Receita - Próximos 12 Meses</h3>
+        <h3 className="text-lg font-semibold mb-4">Previsão de Receita - Jan 2025 a Dez 2026</h3>
         <ResponsiveContainer width="100%" height={350}>
           <LineChart data={forecastAnual}>
             <CartesianGrid strokeDasharray="3 3" />

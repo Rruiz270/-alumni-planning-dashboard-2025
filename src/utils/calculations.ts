@@ -29,10 +29,11 @@ export const calcularForecastAnual = (
   negociacoes: NegociacaoEmAndamento[]
 ): { mes: string; receitaRecorrente: number; receitaPotencial: number }[] => {
   const meses = [];
-  const dataAtual = new Date();
+  const dataInicial = new Date(2025, 0, 1); // Janeiro 2025
   
-  for (let i = 0; i < 12; i++) {
-    const mes = new Date(dataAtual.getFullYear(), dataAtual.getMonth() + i, 1);
+  // Calcular 24 meses (Jan 2025 - Dez 2026)
+  for (let i = 0; i < 24; i++) {
+    const mes = new Date(dataInicial.getFullYear(), dataInicial.getMonth() + i, 1);
     const mesStr = mes.toLocaleDateString('pt-BR', { month: 'short', year: 'numeric' });
     
     const contratosAtivos = contratos.filter(c => {
@@ -88,4 +89,17 @@ export const calcularROIMarketing = (
   const custoTotal = calcularCustoMarketing(estrategias);
   if (custoTotal === 0) return 0;
   return ((receitaPotencial - custoTotal) / custoTotal) * 100;
+};
+
+export const calcularValorTotalContrato = (contrato: Partial<Contrato>): number => {
+  if (!contrato.dataInicio || !contrato.dataFim || !contrato.valorMensal) return 0;
+  
+  const inicio = new Date(contrato.dataInicio);
+  const fim = new Date(contrato.dataFim);
+  
+  // Calcular diferença em meses
+  const diffTempo = fim.getTime() - inicio.getTime();
+  const diffMeses = Math.ceil(diffTempo / (1000 * 60 * 60 * 24 * 30.44)); // 30.44 = média de dias por mês
+  
+  return contrato.valorMensal * diffMeses;
 };

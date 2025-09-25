@@ -13,6 +13,8 @@ export interface Contrato {
   possibilidadeUpsell: boolean;
   valorUpsellEstimado?: number;
   observacoes?: string;
+  documentos?: string[];
+  links?: string[];
 }
 
 export interface NegociacaoEmAndamento {
@@ -27,6 +29,8 @@ export interface NegociacaoEmAndamento {
   dataProximaAcao: Date;
   estagio: 'prospeccao' | 'proposta' | 'negociacao' | 'fechamento';
   observacoes?: string;
+  documentos?: string[];
+  links?: string[];
 }
 
 export interface EstrategiaMarketing {

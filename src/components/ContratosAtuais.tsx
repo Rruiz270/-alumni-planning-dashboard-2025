@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import type { Contrato, VerticalType } from '../types';
-import { Calendar, Users, DollarSign, TrendingUp, Edit2, Plus } from 'lucide-react';
+import { Calendar, Users, DollarSign, TrendingUp, Edit2, Plus, Link, Upload } from 'lucide-react';
 import { formatDateForInput, parseInputDate } from '../utils/dateHelpers';
+import { calcularValorTotalContrato } from '../utils/calculations';
 
 interface Props {
   contratos: Contrato[];
@@ -173,6 +174,44 @@ export const ContratosAtuais: React.FC<Props> = ({ contratos, onUpdateContrato, 
                 className="w-full p-2 border rounded-md"
               />
             </div>
+            <div className="col-span-2">
+              <label className="block text-sm font-medium mb-1">Observações</label>
+              <textarea
+                value={formData.observacoes || ''}
+                onChange={(e) => setFormData({ ...formData, observacoes: e.target.value })}
+                className="w-full p-2 border rounded-md"
+                rows={2}
+              />
+            </div>
+            <div className="col-span-2">
+              <label className="flex items-center gap-2">
+                <input
+                  type="checkbox"
+                  checked={formData.possibilidadeUpsell || false}
+                  onChange={(e) => setFormData({ ...formData, possibilidadeUpsell: e.target.checked })}
+                  className="rounded"
+                />
+                <span className="text-sm font-medium">Possibilidade de Upsell</span>
+              </label>
+            </div>
+            {formData.possibilidadeUpsell && (
+              <div className="col-span-2">
+                <label className="block text-sm font-medium mb-1">Valor Estimado de Upsell (R$)</label>
+                <input
+                  type="number"
+                  value={formData.valorUpsellEstimado || 0}
+                  onChange={(e) => setFormData({ ...formData, valorUpsellEstimado: parseFloat(e.target.value) })}
+                  className="w-full p-2 border rounded-md"
+                />
+              </div>
+            )}
+          </div>
+          <div className="mt-4">
+            <div className="p-3 bg-blue-50 rounded-md">
+              <p className="text-sm font-medium text-blue-900">
+                Valor Total do Contrato: R$ {calcularValorTotalContrato(formData).toLocaleString('pt-BR')}
+              </p>
+            </div>
           </div>
           <div className="mt-4 flex gap-2">
             <button
@@ -233,6 +272,10 @@ export const ContratosAtuais: React.FC<Props> = ({ contratos, onUpdateContrato, 
                   </div>
                 </div>
                 
+                <div className="mt-2 p-2 bg-gray-50 rounded text-sm">
+                  <p className="font-medium">Valor Total: R$ {calcularValorTotalContrato(contrato).toLocaleString('pt-BR')}</p>
+                </div>
+                
                 {contrato.possibilidadeUpsell && (
                   <p className="text-sm text-green-600 mt-2">
                     ⬆️ Possibilidade de upsell: R$ {contrato.valorUpsellEstimado?.toLocaleString('pt-BR')}
@@ -242,6 +285,17 @@ export const ContratosAtuais: React.FC<Props> = ({ contratos, onUpdateContrato, 
                 {contrato.observacoes && (
                   <p className="text-sm text-gray-600 mt-2 italic">{contrato.observacoes}</p>
                 )}
+                
+                <div className="mt-3 flex gap-3">
+                  <button className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800">
+                    <Upload size={16} />
+                    Documentos
+                  </button>
+                  <button className="flex items-center gap-1 text-sm text-blue-600 hover:text-blue-800">
+                    <Link size={16} />
+                    Links
+                  </button>
+                </div>
               </div>
               
               <button
