@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { Pessoa, NecessidadePessoa } from '../types';
 import { User, DollarSign, Plus, Edit2, AlertCircle, Trash2 } from 'lucide-react';
+import { formatDateForInput, parseInputDate } from '../utils/dateHelpers';
 
 interface Props {
   equipeAtual: Pessoa[];
@@ -225,8 +226,13 @@ export const GestaoEquipe: React.FC<Props> = ({
                 <label className="block text-sm font-medium mb-1">Data Contratação</label>
                 <input
                   type="date"
-                  value={formPessoa.dataContratacao ? (formPessoa.dataContratacao instanceof Date ? formPessoa.dataContratacao.toISOString().split('T')[0] : new Date(formPessoa.dataContratacao).toISOString().split('T')[0]) : ''}
-                  onChange={(e) => setFormPessoa({ ...formPessoa, dataContratacao: new Date(e.target.value) })}
+                  value={formatDateForInput(formPessoa.dataContratacao)}
+                  onChange={(e) => {
+                    const date = parseInputDate(e.target.value);
+                    if (date) {
+                      setFormPessoa({ ...formPessoa, dataContratacao: date });
+                    }
+                  }}
                   className="w-full p-2 border rounded-md"
                   required
                 />

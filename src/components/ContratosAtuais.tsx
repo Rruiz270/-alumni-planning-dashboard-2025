@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import type { Contrato, VerticalType } from '../types';
 import { Calendar, Users, DollarSign, TrendingUp, Edit2, Plus } from 'lucide-react';
+import { formatDateForInput, parseInputDate } from '../utils/dateHelpers';
 
 interface Props {
   contratos: Contrato[];
@@ -123,8 +124,13 @@ export const ContratosAtuais: React.FC<Props> = ({ contratos, onUpdateContrato, 
               <label className="block text-sm font-medium mb-1">Data Início</label>
               <input
                 type="date"
-                value={formData.dataInicio ? (formData.dataInicio instanceof Date ? formData.dataInicio.toISOString().split('T')[0] : new Date(formData.dataInicio).toISOString().split('T')[0]) : ''}
-                onChange={(e) => setFormData({ ...formData, dataInicio: new Date(e.target.value) })}
+                value={formatDateForInput(formData.dataInicio)}
+                onChange={(e) => {
+                  const date = parseInputDate(e.target.value);
+                  if (date) {
+                    setFormData({ ...formData, dataInicio: date });
+                  }
+                }}
                 className="w-full p-2 border rounded-md"
                 required
               />
@@ -133,8 +139,13 @@ export const ContratosAtuais: React.FC<Props> = ({ contratos, onUpdateContrato, 
               <label className="block text-sm font-medium mb-1">Data Fim</label>
               <input
                 type="date"
-                value={formData.dataFim ? (formData.dataFim instanceof Date ? formData.dataFim.toISOString().split('T')[0] : new Date(formData.dataFim).toISOString().split('T')[0]) : ''}
-                onChange={(e) => setFormData({ ...formData, dataFim: new Date(e.target.value) })}
+                value={formatDateForInput(formData.dataFim)}
+                onChange={(e) => {
+                  const date = parseInputDate(e.target.value);
+                  if (date) {
+                    setFormData({ ...formData, dataFim: date });
+                  }
+                }}
                 className="w-full p-2 border rounded-md"
                 required
               />
