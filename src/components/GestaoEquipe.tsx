@@ -225,7 +225,7 @@ export const GestaoEquipe: React.FC<Props> = ({
                 <label className="block text-sm font-medium mb-1">Data Contratação</label>
                 <input
                   type="date"
-                  value={formPessoa.dataContratacao instanceof Date ? formPessoa.dataContratacao.toISOString().split('T')[0] : ''}
+                  value={formPessoa.dataContratacao ? (formPessoa.dataContratacao instanceof Date ? formPessoa.dataContratacao.toISOString().split('T')[0] : new Date(formPessoa.dataContratacao).toISOString().split('T')[0]) : ''}
                   onChange={(e) => setFormPessoa({ ...formPessoa, dataContratacao: new Date(e.target.value) })}
                   className="w-full p-2 border rounded-md"
                   required

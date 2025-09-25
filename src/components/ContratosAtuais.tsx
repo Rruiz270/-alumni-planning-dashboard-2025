@@ -123,7 +123,7 @@ export const ContratosAtuais: React.FC<Props> = ({ contratos, onUpdateContrato, 
               <label className="block text-sm font-medium mb-1">Data Início</label>
               <input
                 type="date"
-                value={formData.dataInicio instanceof Date ? formData.dataInicio.toISOString().split('T')[0] : ''}
+                value={formData.dataInicio ? (formData.dataInicio instanceof Date ? formData.dataInicio.toISOString().split('T')[0] : new Date(formData.dataInicio).toISOString().split('T')[0]) : ''}
                 onChange={(e) => setFormData({ ...formData, dataInicio: new Date(e.target.value) })}
                 className="w-full p-2 border rounded-md"
                 required
@@ -133,7 +133,7 @@ export const ContratosAtuais: React.FC<Props> = ({ contratos, onUpdateContrato, 
               <label className="block text-sm font-medium mb-1">Data Fim</label>
               <input
                 type="date"
-                value={formData.dataFim instanceof Date ? formData.dataFim.toISOString().split('T')[0] : ''}
+                value={formData.dataFim ? (formData.dataFim instanceof Date ? formData.dataFim.toISOString().split('T')[0] : new Date(formData.dataFim).toISOString().split('T')[0]) : ''}
                 onChange={(e) => setFormData({ ...formData, dataFim: new Date(e.target.value) })}
                 className="w-full p-2 border rounded-md"
                 required

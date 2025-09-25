@@ -185,7 +185,7 @@ export const NegociacoesAndamento: React.FC<Props> = ({ negociacoes, onUpdateNeg
               <label className="block text-sm font-medium mb-1">Data da Próxima Ação</label>
               <input
                 type="date"
-                value={formData.dataProximaAcao instanceof Date ? formData.dataProximaAcao.toISOString().split('T')[0] : ''}
+                value={formData.dataProximaAcao ? (formData.dataProximaAcao instanceof Date ? formData.dataProximaAcao.toISOString().split('T')[0] : new Date(formData.dataProximaAcao).toISOString().split('T')[0]) : ''}
                 onChange={(e) => setFormData({ ...formData, dataProximaAcao: new Date(e.target.value) })}
                 className="w-full p-2 border rounded-md"
                 required
