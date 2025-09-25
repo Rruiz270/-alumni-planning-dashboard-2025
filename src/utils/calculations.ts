@@ -27,7 +27,7 @@ export const calcularReceitaPotencial = (negociacoes: NegociacaoEmAndamento[]): 
 export const calcularForecastAnual = (
   contratos: Contrato[], 
   negociacoes: NegociacaoEmAndamento[]
-): { mes: string; receitaRecorrente: number; receitaPotencial: number }[] => {
+): { mes: string; receitaContratos: number; receitaNegociacoes: number; receitaTotal: number }[] => {
   const meses = [];
   const dataInicial = new Date(2025, 0, 1); // Janeiro 2025
   
@@ -42,7 +42,7 @@ export const calcularForecastAnual = (
       return c.status === 'ativo' && inicio <= mes && fim >= mes;
     });
     
-    const receitaRecorrente = contratosAtivos.reduce((acc, c) => acc + c.valorMensal, 0);
+    const receitaContratos = contratosAtivos.reduce((acc, c) => acc + c.valorMensal, 0);
     
     const negociacoesPotenciais = negociacoes.filter(n => {
       const dataProxima = new Date(n.dataProximaAcao);
@@ -50,14 +50,15 @@ export const calcularForecastAnual = (
              dataProxima.getFullYear() === mes.getFullYear();
     });
     
-    const receitaPotencial = negociacoesPotenciais.reduce((acc, n) => {
+    const receitaNegociacoes = negociacoesPotenciais.reduce((acc, n) => {
       return acc + (n.valorEstimado * (n.probabilidadeFechamento / 100));
     }, 0);
     
     meses.push({
       mes: mesStr,
-      receitaRecorrente,
-      receitaPotencial: receitaRecorrente + receitaPotencial
+      receitaContratos,
+      receitaNegociacoes,
+      receitaTotal: receitaContratos + receitaNegociacoes
     });
   }
   

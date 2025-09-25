@@ -177,18 +177,26 @@ export const Dashboard: React.FC<Props> = ({ dados }) => {
             <Legend />
             <Line 
               type="monotone" 
-              dataKey="receitaRecorrente" 
+              dataKey="receitaContratos" 
               stroke="#3B82F6" 
-              name="Receita Recorrente"
-              strokeWidth={2}
+              name="Contratos Ativos"
+              strokeWidth={3}
             />
             <Line 
               type="monotone" 
-              dataKey="receitaPotencial" 
-              stroke="#10B981" 
-              name="Receita Potencial Total"
+              dataKey="receitaNegociacoes" 
+              stroke="#F59E0B" 
+              name="Negociações (Potencial)"
               strokeWidth={2}
               strokeDasharray="5 5"
+            />
+            <Line 
+              type="monotone" 
+              dataKey="receitaTotal" 
+              stroke="#10B981" 
+              name="Receita Total Projetada"
+              strokeWidth={2}
+              opacity={0.7}
             />
           </LineChart>
         </ResponsiveContainer>
